@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script type="text/javascript">
+        var tmpImgSrc;
+        function readFile(input) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                tmpImgSrc = e.target.result;
+                document.getElementById("img_thumbnail").src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function saveChanges() {
+            for (var key in TTSV) {
+                TTSV[key] = document.getElementById(key).value;
+            }
+            localStorage.setItem('TTSV', JSON.stringify(TTSV));
+            if (tmpImgSrc != null) {
+                localStorage.setItem('img_src', tmpImgSrc);
+            }
+            window.location.reload();
+            console.log(TTSV);
+        };
+
+        function cancelChanges() {
+            window.location.reload();
+            var storedTTSV = localStorage.getItem('TTSV');
+            if (storedTTSV) {
+                currentTTSV = JSON.parse(storedTTSV);
+                console.log(currentTTSV)
+            } else {
+                console.log(TTSV)
+            }
+        }
+
+        function resetToDefault() {
+            localStorage.setItem('TTSV', JSON.stringify(defaultTTSV));
+            window.location.reload();
+            console.log(defaultTTSV);
+        }
+
+        function editPage() {
+            document.getElementById("edit-button").style.display = "none";
+            document.getElementById("buttons-group").style.display = "block";
+            document.getElementById("image_input").style.display = "block";
+
+            for (var key in TTSV) {
+                document.getElementById(key).readOnly = false;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById("buttons-group").style.display = "none";
+            document.getElementById("image_input").style.display = "none";
+            var storedTTSV = localStorage.getItem('TTSV');
+            if (storedTTSV) {
+                currentTTSV = JSON.parse(storedTTSV);
+                for (var key in currentTTSV) {
+                    document.getElementById(key).value = currentTTSV[key];
+                    document.getElementById(key).readOnly = true;
+                }
+            } else {
+                for (var key in TTSV) {
+                    document.getElementById(key).value = TTSV[key];
+                    document.getElementById(key).readOnly = true;
+                }
+            }
+            var storedImgSrc = localStorage.getItem('img_src');
+            if (storedImgSrc) {
+                document.getElementById("img_thumbnail").src = storedImgSrc;
+            }
+        });
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <table class="dxpnlControl_Mulberry contentPanel" id="ctl00_ctl00_contentPane">
+        <tbody>
+            <tr>
+                <td style="vertical-align:Top;">
+
+                    <table style="width: 100%;">
+
+                        <tbody>
+                            <tr>
+
+                                <td style="vertical-align: top; margin: 0px;">
+
+                                    <div class="dxpnlControl_Mulberry leftMenuPanel"
+                                        id="ctl00_ctl00_contentPane_MainPanel_leftMenuPane">
+                                        <div class="dxpnl-acc">
+
+                                            <div style="width: 285px; padding-top: 10px;">
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle"><img src="image.jpg"
+                                                                style="width:30px;height:30px;border-radius: 50%; ">
+                                                            Nguyễn
+                                                            Trung Kiên</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="#">Thư báo <span class="badge"
+                                                                        style="background-color: rgb(156, 16, 16); --darkreader-inline-bgcolor: #7d0d0d;"
+                                                                        data-darkreader-inline-bgcolor="">0</span></a>
+                                                            </li>
+                                                            <hr>
+                                                            <li><a href="#">Đổi mật
+                                                                    khẩu</a>
+                                                            </li>
+                                                            <hr>
+                                                            <li><a href="#">Cấp
+                                                                    lại mật khẩu Email trường</a></li>
+                                                            <hr>
+                                                            <li><a href="#">Thoát đăng nhập</a>
+                                                            </li>
+                                                            <hr>
+                                                            <li><a href="#">Thông tin
+                                                                    mật
+                                                                    khẩu Email cấp mới</a></li>
+                                                            <hr>
+                                                            <li><a href="#">Xác nhận khai
+                                                                    báo y
+                                                                    tế</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle">Quản lý hồ sơ sinh viên</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="../">Thông tin sinh viên</a></li>
+                                                            <hr>
+                                                            <li><a href="#">Cập
+                                                                    nhật
+                                                                    thông tin cá nhân</a></li>
+                                                            <hr>
+                                                            <li><a href="#">Thông tin
+                                                                    lớp
+                                                                    sinh viên</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle">Đào tạo</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="#">Chương trình
+                                                                    đào
+                                                                    tạo</a>
+                                                            </li>
+                                                            <hr>
+                                                            <li><a href="#">Kế hoạch học
+                                                                    tập</a>
+
+                                                            </li>
+                                                            <hr>
+                                                            <li class=" cosub"><a href="#">Kết quả học
+                                                                    tập</a>
+
+                                                            </li>
+                                                            <hr>
+                                                            <li class="cosub"><a href="#">Đồ án - Tốt
+                                                                    nghiệp</a>
+
+                                                            </li>
+                                                            <hr>
+                                                            <li><a href="#">Thời khóa biểu
+                                                                    tạm
+                                                                    thời</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle">Tư vấn trực tuyến</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="#">Hỏi đáp - Tư vấn trực
+                                                                    tuyến</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle">Tài chính học vụ</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="#">Thông tin công
+                                                                    nợ
+                                                                    học phí</a></li>
+                                                            <hr>
+                                                            <li><a href="#">Thanh toán
+                                                                    học
+                                                                    phí trực tuyến</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                                <div class="l39contentLeft">
+                                                    <div class="l39LeftMain">
+                                                        <h3 class="siteMapTitle">Dịch vụ hành chính</h3>
+                                                        <ul class="siteMap">
+                                                            <li><a href="#">ĐK
+                                                                    cấp giấy tờ</a></li>
+                                                            <hr>
+                                                        </ul>
+                                                    </div>
+                                                </div><br>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width: 100%; vertical-align: top; margin: 0px; padding: 10px;">
+                                    <div class="MainContentTitle">
+
+
+                                        <h3 class="mainTitle">THÔNG TIN CÁ NHÂN</h3>
+
+
+                                        <hr>
+                                    </div>
+                                    <div class="MainContent">
+
+                                        <div class="row">
+                                            <span class="mainTitle">THÔNG TIN SINH
+                                                VIÊN
+                                                <span id="edit-button">
+                                                    <a onclick="editPage()"><i class="fas fa-edit"></i></a>
+                                                </span>
+                                                <span id="buttons-group" style="text-align: right;">
+                                                    <button onclick="saveChanges()">OK</button>
+                                                    <button onclick="cancelChanges()">Cancel</button>
+                                                    <button onclick="resetToDefault()">Reset</button>
+                                                </span>
+                                            </span>
+                                            <hr>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="dxpnlControl_Mulberry center">
+
+                                                    <img class="img-thumbnail dxeImage_Mulberry" id="img_thumbnail"
+                                                        src="image.jpg" alt=""
+                                                        style="width:200px; box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);">
+                                                    <input type="file" id="image_input" accept=".jpg, .png, .jpeg" onchange="readFile(this)">
+
+                                                </div>
+                                                <div class="text-center">
+                                                    <span class="normalText"><strong>MSSV:</strong>
+                                                        <input type="number" id="mssv"></span>
+                                                    </span>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="normalText"
+                                                    id="ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo1">
+                                                    <strong>Họ và tên : </strong><input type="text" id="ho_ten"
+                                                        value="">
+                                                    <br>
+                                                    <strong>Năm vào trường :</strong>
+                                                    <input type="number" id="nam_vao_truong" value="">
+                                                    <br>
+                                                    <strong>Bậc đào tạo : </strong>
+                                                    <input type="text" id="bac_dao_tao" value="">
+                                                    <br>
+                                                    <strong>Chương trình : </strong>
+                                                    <input type="text" id="chuong_trinh" value="">
+                                                    <br>
+                                                    <strong>Khoa/Viện quản lý : </strong>
+                                                    <input type="text" id="khoa_vien_quan_ly" value="">
+                                                    <br>
+                                                    <strong>Tình trạng học tập : </strong>
+                                                    <input type="text" id="tinh_trang_hoc_tap" value="">
+                                                    <br>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <span class="normalText">
+                                                    <strong>Giới tính: </strong>
+                                                    <select id="gioi_tinh">
+                                                        <option value="Nam">Nam</option>
+                                                        <option value="Nữ">Nữ</option>
+                                                        <option value="Khác">Khác</option>
+                                                    </select>
+                                                    <br>
+                                                    <strong>Lớp: </strong>
+                                                    <input type="text" id="lop" value=""><br>
+                                                    <strong>Khóa học: </strong>
+                                                    <input type="text" id="khoa_hoc" value=""><br>
+                                                    <strong>Email: </strong>
+                                                    <input type="text" id="email" value=""><br>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <span class="mainTitle">THÔNG TIN HỌC TẬP</span>
+                                            <br>
+                                            <hr>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="normalText"
+                                                    id="ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo3">
+                                                    <strong>Tổng kết học kỳ :</strong>
+                                                    <input type="text" id="tong_ket_hoc_ky" value=""><br>
+                                                    <strong>Trung bình tích lũy :</strong>
+                                                    <input type="text" id="trung_binh_tich_luy" value=""><br>
+                                                    <strong>Số TC nợ đăng ký :</strong>
+                                                    <input type="number" id="so_tc_no_dang_ky" value=""><br>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="normalText"
+                                                    id="ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo4">
+                                                    <strong>Số TC tích lũy :</strong>
+                                                    <input type="number" id="so_tc_tich_luy" value=""><br>
+                                                    <strong>Trình độ sinh viên :</strong>
+                                                    <input type="number" id="trinh_do_sinh_vien" value=""><br>
+                                                    <strong>Mức cảnh báo :</strong>
+                                                    <input type="text" id="muc_canh_bao" value=""><br>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <span class="mainTitle">THÔNG TIN CÁ NHÂN</span>
+                                            <br>
+                                            <hr>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="normalText"
+                                                    id="ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo5">
+                                                    <strong>Dân tộc :</strong>
+                                                    <input type="text" id="dan_toc" value=""><br>
+                                                    <strong>Năm TN cấp 3 :</strong>
+                                                    <input type="text" id="nam_tn_cap_3" value=""><br>
+                                                    <strong>Địa chỉ :</strong>
+                                                    <input type="text" id="dia_chi" value=""><br>
+                                                    <strong>Số CMTND :</strong>
+                                                    <input type="text" id="so_cmtnd" value=""><br>
+                                                    <strong>Nơi cấp :</strong>
+                                                    <input type="text" id="noi_cap" value=""><br>
+                                                    <strong>Họ tên bố :</strong>
+                                                    <input type="text" id="ho_ten_bo" value="NGUYỄN TRUNG HIẾU"><br>
+                                                    <strong>Năm sinh :</strong>
+                                                    <input type="number" id="nam_sinh_bo" value="1974"><br>
+                                                    <strong>Nghề nghiệp :</strong>
+                                                    <input type="text" id="nghe_nghiep_bo" value="DOANH NGHIỆP"><br>
+                                                    <strong>Điện thoại :</strong>
+                                                    <input type="text" id="dien_thoai_bo" value="093***89"><br>
+                                                    <strong>Email :</strong>
+                                                    <input type="email" id="email_bo" value="TR*@*IL.COM"><br>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="normalText"
+                                                    id="ctl00_ctl00_contentPane_MainPanel_MainContent_lbTextInfo6">
+                                                    <strong>Tôn giáo :</strong>
+                                                    <input type="text" id="ton_giao" value="KHÔNG"><br>
+                                                    <strong>Trường THPT :</strong>
+                                                    <input type="text" id="truong_thpt"
+                                                        value="HUỲNH THÚC KHÁNG - NGHỆ AN"><br>
+                                                    <strong>Hộ khẩu :</strong>
+                                                    <input type="text" id="ho_khau"
+                                                        value="PHƯỜNG QUANG TRUNG, THÀNH PHỐ VINH, TỈNH NGHỆ AN"><br>
+                                                    <strong>Số Điện thoại :</strong>
+                                                    <input type="text" id="so_dien_thoai" value="093***31"><br>
+                                                    <strong>Họ tên mẹ :</strong>
+                                                    <input type="text" id="ho_ten_me" value="NGUYỄN THỊ TỐ NGA"><br>
+                                                    <strong>Năm sinh :</strong>
+                                                    <input type="number" id="nam_sinh_me" value="1978"><br>
+                                                    <strong>Nghề nghiệp :</strong>
+                                                    <input type="text" id="nghe_nghiep_me" value="DOANH NGHIỆP"><br>
+                                                    <strong>Điện thoại :</strong>
+                                                    <input type="text" id="dien_thoai_me" value="093***79"><br>
+                                                    <strong>Email :</strong>
+                                                    <input type="email" id="email_me" value="KI*@*IL.COM"><br>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                        <div class="row">
+                                            <span class="normalText" style="padding-left: 10px;"><strong>Ghi chú:
+                                                </strong><span>Nếu sinh viên thấy thông tin của mình
+                                                    chưa
+                                                    chính xác, xin vui lòng liên hệ phòng Đào tạo để cập nhật
+                                                    lại.</span></span>
+                                        </div>
+
+
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
